@@ -13,7 +13,8 @@ import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.AutocompleteRequiredInputValidator;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalValidationVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisionVTwo;
+// import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisionVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.HTML5DateTimeVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ChildVClassesWithParent;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
@@ -144,7 +145,8 @@ public class AddPresenterRoleToPersonGenerator extends VivoBaseGenerator impleme
 
         conf.addField( new FieldVTwo().setName("startField").
                 setEditElement(
-                        new DateTimeWithPrecisionVTwo(null,
+ //                       new DateTimeWithPrecisionVTwo(null,
+                          new HTML5DateTimeVTwo(null,
                                 VitroVocabulary.Precision.YEAR.uri(),
                                 VitroVocabulary.Precision.NONE.uri())
                               )
@@ -152,13 +154,15 @@ public class AddPresenterRoleToPersonGenerator extends VivoBaseGenerator impleme
 
         conf.addField( new FieldVTwo().setName("endField").
                 setEditElement(
-                        new DateTimeWithPrecisionVTwo(null,
+//                        new DateTimeWithPrecisionVTwo(null,
+                          new HTML5DateTimeVTwo(null,
                                 VitroVocabulary.Precision.YEAR.uri(),
                                 VitroVocabulary.Precision.NONE.uri())
                               )
                 );
 
-        conf.addValidator(new DateTimeIntervalValidationVTwo("startField","endField"));
+//      for demonstration purposes we skip validation
+//      conf.addValidator(new DateTimeIntervalValidationVTwo("startField","endField"));
         conf.addValidator(new AntiXssValidation());
         conf.addValidator(new AutocompleteRequiredInputValidator("existingPresentation", "presentationLabel"));
         prepare(vreq, conf);
